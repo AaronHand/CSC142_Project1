@@ -3,7 +3,7 @@ import java.awt.Color; // access the Color class
 
 /**
  * <p>Create a tree with ornaments in a graphics window</p>
- * Serge Kalinin your name here
+ * @author Serge Kalinin
  */
 
 public class Tree {

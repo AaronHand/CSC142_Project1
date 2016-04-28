@@ -8,7 +8,11 @@ import snowman.Snowman;
  * fourth element of your choice in a graphics window
  * </p>
  * 
- * @author Your name here
+ * @authors 
+ *  HUIYING CAO
+ * 	MAHONRI R GIBSON
+ *  Aaron Hand
+ *  Serge Kalinin	
  */
 
 public class MountainScene {

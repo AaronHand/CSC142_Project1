@@ -4,7 +4,7 @@ import java.awt.Color; // access the Color class
 
 /**
  * <p>Create a cable car in a graphics window</p>  
- * @author your name here
+ * @author Mahonri Gibson
  */
 
 public class CableCar {

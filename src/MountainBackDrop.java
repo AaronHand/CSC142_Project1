@@ -1,6 +1,10 @@
 import uwcse.graphics.*; // access the graphics utilities in the uw library
 import java.awt.Color; // access the Color class
 
+/**
+ * <p>Create a mountain for background imagery</p>  
+ * @author Mahonri Gibson
+ */
 
 public class MountainBackDrop {
 	
