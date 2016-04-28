@@ -3,8 +3,8 @@ import java.awt.Color; // access the Color class
 
 /**
  * <p>Create a tree with ornaments in a graphics window</p>
- * @author your name here
- */   
+ * Serge Kalinin your name here
+ */
 
 public class Tree {
 
@@ -38,28 +38,52 @@ public class Tree {
     this.y = y;
 
     // the details of the drawing are in written in the private method draw()
-    this.Draw();
+    this.draw();
   }
 
   /**
    * draw a pine tree
    */
-  private void Draw()
+  private void draw()
   {
-    // trunk of the tree: a brown rectangle
-    // (int) converts to an int 20*this scale (etc...), which is a double
-    // For instance, (int)23.8 is 23
+
     // This is necessary since the Rectangle constructor takes integers
     Rectangle trunk = new Rectangle(this.x,this.y,(int)(20*this.scale),(int)(60*this.scale),
-			            Color.black,true);
+            Color.black,true);
     // Foliage (improve the drawing!)
     // a green triangle
-    Triangle foliage = new Triangle(this.x-(int)(30*this.scale),this.y+(int)(30*this.scale),
-				 this.x+(int)(10*this.scale),this.y-(int)(10*this.scale),
-				 this.x+(int)(50*this.scale),this.y+(int)(30*this.scale),
-				 Color.green,true);
+    Triangle foliage = new Triangle(this.x-(int)(45*this.scale),this.y+(int)(45*this.scale),
+            this.x+(int)(10*this.scale),this.y-(int)(10*this.scale),
+            this.x+(int)(65*this.scale),this.y+(int)(45*this.scale),
+            Color.green,true);
+    Triangle foliage2 = new Triangle(this.x-(int)(35*this.scale),this.y+(int)(15*this.scale),
+            this.x+(int)(10*this.scale),this.y-(int)(30*this.scale),
+            this.x+(int)(55*this.scale),this.y+(int)(15*this.scale),
+            Color.green,true);
+    Triangle foliage3 = new Triangle(this.x-(int)(25*this.scale),this.y-(int)(15*this.scale),
+            this.x+(int)(10*this.scale),this.y-(int)(50*this.scale),
+            this.x+(int)(45*this.scale),this.y-(int)(15*this.scale),
+            Color.green,true);
+
+    //Ornaments
+    int ornament = (int) (5 * this.scale);
+    Oval blueornament = new Oval(this.x -(int)(10*this.scale), this.y - (int)(10*this.scale),
+            2 * ornament, 2 * ornament, Color.blue, true);
+    Oval yellowornament = new Oval(this.x +(int)(10*this.scale), this.y - (int)(20*this.scale),
+            2 * ornament, 2 * ornament, Color.yellow, true);
+    Oval orangeornament = new Oval(this.x -(int)(5*this.scale), this.y + (int)(25*this.scale),
+            2 * ornament, 2 * ornament, Color.orange, true);
+    Oval redornament = new Oval(this.x +(int)(15*this.scale), this.y + (int)(5*this.scale),
+            2 * ornament, 2 * ornament, Color.red, true);
+
     this.window.add(trunk);
     this.window.add(foliage);
+    this.window.add(foliage2);
+    this.window.add(foliage3);
+    this.window.add(blueornament);
+    this.window.add(yellowornament);
+    this.window.add(orangeornament);
+    this.window.add(redornament);
 
     // Improve the drawing of the foliage and add the ornaments...
   }

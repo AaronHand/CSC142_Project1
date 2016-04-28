@@ -6,18 +6,13 @@ package snowman;
  *
  * Draws a snowman given it's location, scale, and window.
  *
- * TODO: Possibly break parts up into separate objects.
  *
  */
 
 import uwcse.graphics.*;
 import uwcse.graphics.Rectangle;
 
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.text.FieldPosition;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.Random;
 
 public class Snowman {
