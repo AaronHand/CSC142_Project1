@@ -25,12 +25,8 @@ public class MountainScene extends GWindowEventAdapter {
 	private Tree tree1, tree2, tree3;
 	// A cable car that moves back and forth across the window
 	private CableCar cableCar;
-	// Add here the declaration of an instance field of the type that you
-	// created in hw1
-	// YOU MUST NAME THIS VARIABLE: myElement. Thus your statement should be
-	// (replacing
-	// classname with the name of your class)
-	// private classname myElement;
+	// A mountain goat that moves its legs
+	private MountainGoat myElement;
 
 	// To keep track of the duration of the animation
 	private int animationCounter;
@@ -66,7 +62,7 @@ public class MountainScene extends GWindowEventAdapter {
 //		this.tree2.flashOrnaments();
 //		this.tree3.flashOrnaments();
 //		this.cableCar.move();
-		// this.myElement.doAction();
+		this.myElement.moveLegs();
 		this.window.resumeRepaints();
 
 		// Run the animation 100 times (about 15 s)
@@ -95,9 +91,6 @@ public class MountainScene extends GWindowEventAdapter {
 		this.tree2 = new Tree(250, 250, 1.2, this.window);
 		this.snowMan1 = new Snowman(100, 200, 1, this.window);
 		this.snowMan2 = new Snowman(400, 150, 0.7, this.window);
-
-		// Complete the line of code below to instantiate an object of the type
-		// that you created in homework #1
-		// this.myElement = new ???;
+		this.myElement = new MountainGoat(300, 200, 0.5, this.window);
 	}
 }

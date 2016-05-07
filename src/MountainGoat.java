@@ -1,13 +1,14 @@
 import java.awt.Color;
 
 import uwcse.graphics.GWindow;
+import uwcse.graphics.Polygon;
 import uwcse.graphics.Rectangle;
 import uwcse.graphics.Triangle;
 
 /**
  * @author huiyingcao
  *
- * A MountainGoat that can be added to a GWindow.
+ * A MountainGoat with moving legs that can be added to a GWindow.
  */
 public class MountainGoat {
 	
@@ -15,6 +16,16 @@ public class MountainGoat {
 	private int y;
 	private double scale;
 	private GWindow window;
+	
+	private Polygon leftLeg;
+	private int leftLegX;
+	private int leftLegY;
+	
+	private Polygon rightLeg;
+	private int rightLegX;
+	private int rightLegY;
+	
+	private boolean goingForward;
 	
 	/**
 	 * @param x 
@@ -31,6 +42,7 @@ public class MountainGoat {
 		this.y = y;
 		this.scale = scale;
 		this.window = window;
+		this.goingForward = true;
 		this.drawGoat();
 	}
 
@@ -53,8 +65,8 @@ public class MountainGoat {
 		this.drawHead(this.x, this.y - 10);
 		
 		// Make the legs
-		this.drawLeg(this.x, this.y + size);
-		this.drawLeg(this.x + 2*size - (int) (10 * this.scale), this.y + size);
+		this.drawLeftLeg(this.x, this.y + size);
+		this.drawRightLeg(this.x + 2*size - (int) (10 * this.scale), this.y + size);
 		
 		// Make the tail
 		this.drawTail(this.x + 2*size, this.y);
@@ -94,18 +106,37 @@ public class MountainGoat {
 	}
 	
 	/**
-	 * 
-	 * Draw a leg at the given position
-	 * 
+	 * Draws the right leg as a four point polygon
 	 * @param x
-	 *     The x coordinate of the top left corner
 	 * @param y
-	 *     The y coordinate of the top left corner
 	 */
-	private void drawLeg(int x, int y) {
+	private void drawRightLeg(int x, int y) {
 		int size = (int) (10 * this.scale);
-		Rectangle leg = new Rectangle(x, y, size, 3*size, Color.white, true);
-		this.window.add(leg);
+		rightLeg = new Polygon(Color.white, true);
+		rightLegX = x;
+		rightLegY = y;
+		rightLeg.addPoint(x, y);
+		rightLeg.addPoint(x + size, y);
+		rightLeg.addPoint(x + size, y + 3 * size);
+		rightLeg.addPoint(x, y + 3 * size);
+		this.window.add(rightLeg);
+	}
+	
+	/**
+	 * Draws the left leg as a four point polygon
+	 * @param x
+	 * @param y
+	 */
+	private void drawLeftLeg(int x, int y) {
+		int size = (int) (10 * this.scale);
+		leftLeg = new Polygon(Color.white, true);
+		leftLegX = x;
+		leftLegY = y;
+		leftLeg.addPoint(x, y);
+		leftLeg.addPoint(x + size, y);
+		leftLeg.addPoint(x + size, y + 3 * size);
+		leftLeg.addPoint(x, y + 3 * size);
+		this.window.add(leftLeg);
 	}
 	
 	/**
@@ -121,5 +152,22 @@ public class MountainGoat {
 		int size = (int) (10 * this.scale);
 		Rectangle tail = new Rectangle(x, y, 2*size, size, Color.white, true);
 		this.window.add(tail);
+	}
+
+	/**
+	 * This method moves the legs
+	 */
+	public void moveLegs() {
+		if (goingForward) {
+			rightLeg.rotateAround(rightLegX, rightLegY, 30);
+			leftLeg.rotateAround(leftLegX, leftLegY, -30);
+			goingForward = false;
+		} else {
+			rightLeg.rotateAround(rightLegX, rightLegY, -30);
+			leftLeg.rotateAround(leftLegX, leftLegY, 30);
+			goingForward = true;
+		
+		}	
+		
 	}
 }
