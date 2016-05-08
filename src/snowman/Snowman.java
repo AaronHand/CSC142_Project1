@@ -4,7 +4,7 @@ package snowman;
  * Created by Aaron Hand on 4/18/16.
  * Project: Project1
  *
- * Draws a snowman given it's location, scale, and window.
+ * Draws a moving snowman
  *
  *
  */
@@ -17,8 +17,16 @@ import java.util.Random;
 
 public class Snowman {
 
+    //grid just makes pixel calculations easier
     private Grid grid;
     private GWindow window;
+
+    //move switch
+    private boolean move = false;
+
+    //arms and hat fields for movement
+    private Line lArm,rArm,lHand,rHand;
+    private Rectangle hatTop,hatBottom;
 
     /**
      * @param x point
@@ -57,6 +65,9 @@ public class Snowman {
                 true
         ));
 
+        /**
+         * NOSE
+         */
         window.add(new Oval(
                 grid.getX(6,4),
                 grid.getY(6,4),
@@ -68,6 +79,8 @@ public class Snowman {
 
         /**
          * MOUTH
+         * Series of squares that make a smile
+         *
          */
         window.add(new Rectangle(
                 grid.getX(4,7),
@@ -134,23 +147,25 @@ public class Snowman {
          * HAT
          */
 
-        window.add(new Rectangle(
+        hatBottom = new Rectangle(
                 grid.getX(2,2),
                 grid.getY(2,2),
                 grid.spanX(7),
-                grid.spanX(1),
+                grid.spanY(1),
                 Color.black,
                 true
-        ));
+        );
+        window.add(hatBottom);
 
-        window.add(new Rectangle(
+        hatTop = new Rectangle(
                 grid.getX(3,0),
                 grid.getY(3,0),
                 grid.spanX(5),
-                grid.spanX(2),
+                grid.spanY(2),
                 Color.black,
                 true
-        ));
+        );
+        window.add(hatTop);
     }
 
     /**
@@ -186,39 +201,77 @@ public class Snowman {
     private void addArms(){
 
         //left arm
-        window.add(new Line(
+        lArm = new Line(
                 grid.getX(0,6) - grid.spanX(1),
                 grid.getY(0,5),
                 grid.getX(0,12),
                 grid.getY(0,12),
                 Color.black
 
-        ));
+        );
+        window.add(lArm);
 
         //left hand
-        window.add(new Line(
+        lHand = new Line(
                 grid.getX(0,6) + grid.spanX(1),
                 grid.getY(0,6),
                 grid.getX(0,6) - grid.spanX(2),
                 grid.getY(0,6) + grid.spanY(1)/2
-        ));
+        );
+        window.add(lHand);
 
         //right arm
-        window.add(new Line(
+        rArm = new Line(
                 grid.getX(10,5) + grid.spanX(2),
                 grid.getY(10,5) ,
                 grid.getX(10,12) + grid.spanX(1),
                 grid.getY(10,12),
                 Color.black
 
-        ));
+        );
+        window.add(rArm);
 
         //right hand
-        window.add(new Line(
+        rHand = new Line(
                 grid.getX(10,6),
                 grid.getY(10,6),
                 grid.getX(10,7) + grid.spanX(3),
                 grid.getY(10,7)
-        ));
+        );
+        window.add(rHand);
+    }
+
+
+    /**
+     * This rotates arms based on their lower position and squishes the hat up and down
+     */
+    public void moveArmsAndHat(){
+        if(move){
+            //rotate around arms out on lower axis
+            rArm.rotateAround(grid.getX(10,12) + grid.spanX(1),grid.getY(10,12),70);
+            rHand.rotateAround(grid.getX(10,12) + grid.spanX(1),grid.getY(10,12),70);
+            lArm.rotateAround(grid.getX(0,12),grid.getY(0,12),-75);
+            lHand.rotateAround(grid.getX(0,12),grid.getY(0,12),-75);
+
+            //move hat's y point up
+            hatTop.moveBy(0,-15);
+            hatBottom.moveBy(0,-5);
+
+            //switch move direction
+            move = !move;
+        } else {
+            //rotate arms in on lower axis
+            rArm.rotateAround(grid.getX(10,12) + grid.spanX(1),grid.getY(10,12),-70);
+            rHand.rotateAround(grid.getX(10,12) + grid.spanX(1),grid.getY(10,12),-70);
+            lArm.rotateAround(grid.getX(0,12),grid.getY(0,12),75);
+            lHand.rotateAround(grid.getX(0,12),grid.getY(0,12),75);
+
+            //move hat's y point down
+            hatTop.moveBy(0,15);
+            hatBottom.moveBy(0,5);
+
+            //switch move direction
+            move = !move;
+        }
     }
 }

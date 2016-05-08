@@ -1,6 +1,6 @@
 import uwcse.graphics.*; // access the graphics utilities in the uw library
 import java.awt.Color; // access the Color class
-import snowman.Snowman;
+import snowman.*;
 
 /**
  * <p>
@@ -56,7 +56,7 @@ public class MountainScene extends GWindowEventAdapter {
 	// To do the animation
 	public void timerExpired(GWindowEvent we) {
 		this.window.suspendRepaints();
-//		this.snowMan1.moveArmsAndHat();
+		this.snowMan1.moveArmsAndHat();
 //		this.snowMan2.moveArmsAndHat();
 //		this.tree1.flashOrnaments();
 //		this.tree2.flashOrnaments();
@@ -84,13 +84,13 @@ public class MountainScene extends GWindowEventAdapter {
 	 */
 	private void addGraphicsElements() {
 		// You can change the coordinates and scales that appear
-		// in the constructors (but don't change the names of the variables)
-		this.tree3 = new Tree(300, 100, 0.6, this.window);
-		this.cableCar = new CableCar(350, 100, 1, this.window);
-		this.tree1 = new Tree(200, 120, 0.8, this.window);
-		this.tree2 = new Tree(250, 250, 1.2, this.window);
+//		// in the constructors (but don't change the names of the variables)
+//		this.tree3 = new Tree(300, 100, 0.6, this.window);
+//		this.cableCar = new CableCar(350, 100, 1, this.window);
+//		this.tree1 = new Tree(200, 120, 0.8, this.window);
+//		this.tree2 = new Tree(250, 250, 1.2, this.window);
 		this.snowMan1 = new Snowman(100, 200, 1, this.window);
-		this.snowMan2 = new Snowman(400, 150, 0.7, this.window);
+//		this.snowMan2 = new Snowman(400, 150, 0.7, this.window);
 		this.myElement = new MountainGoat(300, 200, 0.5, this.window);
 	}
 }
