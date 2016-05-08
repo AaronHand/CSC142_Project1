@@ -61,7 +61,7 @@ public class MountainScene extends GWindowEventAdapter {
 //		this.tree1.flashOrnaments();
 //		this.tree2.flashOrnaments();
 //		this.tree3.flashOrnaments();
-//		this.cableCar.move();
+		this.cableCar.move();
 		this.myElement.moveLegs();
 		this.window.resumeRepaints();
 
@@ -86,7 +86,7 @@ public class MountainScene extends GWindowEventAdapter {
 		// You can change the coordinates and scales that appear
 //		// in the constructors (but don't change the names of the variables)
 //		this.tree3 = new Tree(300, 100, 0.6, this.window);
-//		this.cableCar = new CableCar(350, 100, 1, this.window);
+		this.cableCar = new CableCar(350, 100, 1, this.window);
 //		this.tree1 = new Tree(200, 120, 0.8, this.window);
 //		this.tree2 = new Tree(250, 250, 1.2, this.window);
 		this.snowMan1 = new Snowman(100, 200, 1, this.window);
