@@ -11,8 +11,13 @@ public class CableCar {
 
 	// Your instance fields go here
 	private int x, y, startX, startY, width, height;
+	private Rectangle body;
+	private Rectangle[] windows;
+	private Polygon hanger;
+	private Line cable;
+	private boolean isMovingRight;
 	private double scale;
-	GWindow window;
+	private GWindow window;
 
 	/**
 	* Create a cable car at location (x,y) in the GWindow window.
@@ -29,6 +34,7 @@ public class CableCar {
 		this.y = y;
 		this.scale = scale;
 		this.window = window;
+		this.isMovingRight = true;
 		
 		/** 
 		 * Useful calculations for overall size and 
@@ -40,6 +46,36 @@ public class CableCar {
 		startY = y-(height/2);
 		// The details of the drawing are in a private method
 		Draw();
+	}
+	
+	public void move(){
+		if (isMovingRight){
+			x = x + 4;
+			y = y + 2;
+			body.moveBy(4,  -2);
+			windows[0].moveBy(4,  -2);
+			windows[1].moveBy(4,  -2);
+			windows[2].moveBy(4,  -2);
+			hanger.moveBy(4,  -2);
+			cable.moveBy(4, -2);
+			if (x >= window.getWindowWidth()){
+				isMovingRight = false;
+			}
+		} else {
+			x = x - 4;
+			y = y - 2;
+			body.moveBy(-4,  2);
+			windows[0].moveBy(-4,  2);
+			windows[1].moveBy(-4,  2);
+			windows[2].moveBy(-4,  2);
+			hanger.moveBy(-4,  2);
+			cable.moveBy(-4, 2);
+			if (x <= 0){
+				isMovingRight = true;
+			}
+		}
+		
+		
 	}
 	
 	/**
@@ -57,7 +93,7 @@ public class CableCar {
 	 *  default size will be 100px*60px 
 	 */
 	private void DrawBody() {
-		Rectangle body = new Rectangle(startX, startY, width, height, Color.lightGray, true);
+		body = new Rectangle(startX, startY, width, height, Color.lightGray, true);
 		window.add(body);
 	}
 	
@@ -67,14 +103,15 @@ public class CableCar {
 	 * and half the height of the body
 	 */
 	private void DrawWindows(){
+		windows = new Rectangle[3];
 		int windowWidth = width / 4;
 		int windowHeight = height / 2;
 		int spacer = width / 3; // used for spacing windows out
 		for (int i = 0; i < 3; i++){
 			int windowX = startX + spacer*i + (int)(5*scale); 
 			int windowY = startY + (int)(5*scale);
-			Rectangle w = new Rectangle(windowX, windowY, windowWidth, windowHeight, Color.white, true);
-			window.add(w);
+			windows[i] = new Rectangle(windowX, windowY, windowWidth, windowHeight, Color.white, true);
+			window.add(windows[i]);
 		}
 	}
 	
@@ -84,7 +121,7 @@ public class CableCar {
 	 */
 	private void DrawHangers(){
 		int startPointX = startX + (width /2); // start in middle of car
-		Polygon hanger = new Polygon(Color.gray, true);
+		hanger = new Polygon(Color.gray, true);
 		hanger.addPoint(startPointX, startY);
 		hanger.addPoint(startPointX + (width/10), startY - (height/2));
 		hanger.addPoint(startPointX - (width/10), startY - (height/2));
@@ -102,14 +139,12 @@ public class CableCar {
 	 * a diagonal line stretching across screen, meeting up with point
 	 */
 	private void DrawCables(){
-		int windowHeight = window.getWindowHeight();
 		int windowWidth = window.getWindowWidth();
 		
 		int hangerPointX = (startX + (width / 2)) - (width/10);
 		int hangerPointY = startY - (height / 2);
 		
-		Line cable = new Line(hangerPointX-windowWidth, hangerPointY+(2*height), hangerPointX+windowWidth, hangerPointY-(2*height));
-		//Line cable2 = new Line(0, hangerPointY+(2*height), hangerPointX, hangerPointY);
+		cable = new Line(hangerPointX-windowWidth, hangerPointY+(2*height), hangerPointX+windowWidth, hangerPointY-(2*height));
 		window.add(cable);
 	}
 }
